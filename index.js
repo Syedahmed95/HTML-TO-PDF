@@ -4,13 +4,15 @@ var app = express();
 var fs = require('fs');
 var pdf = require('html-pdf');
 var html = fs.readFileSync('views/crm.ejs', 'utf8');
-var options = { format: 'a4' };
+var options = { format: 'a4', base: 'file://' + __dirname + '\public' };
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
+app.use(express.static("public"))
 
 app.get("/",function(req,res){
-    res.render("home.ejs");
+  console.log( __dirname + '/public/')
+    res.render("crm.ejs");
 });
 
 app.post("/crm",function(req,res){
