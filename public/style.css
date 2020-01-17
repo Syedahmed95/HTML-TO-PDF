@@ -1,0 +1,17 @@
+.textpos{
+   margin-top: 50px;
+   font-size: 22px;
+}
+.textpos1{
+    margin-top: 200px ;
+}
+.textpos2{
+    position: relative;
+    top:180px
+}
+.textmargin{
+    margin-top: 80px;
+}
+.tablemargin{
+    margin-top: 40px;
+}
