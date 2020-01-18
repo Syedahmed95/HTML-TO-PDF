@@ -1,0 +1,523 @@
+<div class="modal-header">
+  <button class="btn btn-primary" (click)="genPDF()">gen PDF</button>
+  <!--<button class="btn btn-primary" (click)="genPDF()">gen PDF</button>-->
+  <button style="float:right;" type="button" class="btn btn-default" (click)="bsModalRef.hide()">
+    <span  aria-hidden="true">&times;</span>
+  </button>
+  <!--<button style="float:right;" type="button" class="btn btn-default" (click)="nextPage()">Next</button>-->
+  <span class="aligner" >showing {{studntChalan.length}} reciepts</span>
+  <!--<button style="float:right;" type="button"  class="btn btn-default" (click)="prevPage()">Previous</button>-->
+</div>
+<div  id="ttt">
+<div class="row  font-sizer-1" *ngFor="let studentChalan of recToMake; let i = index" >
+
+  <div *ngIf="i > 0" class="html2pdf__page-break break"></div>
+  <!--ngFor for studentCopy-->
+  <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4">
+    <div class="border-adder">
+      <b><span class="span-color-1" align="left" style="margin-left: 4px"> SCHOOL'S COPY &nbsp; &nbsp; </span></b>
+      <div class="row">
+        <div style="margin-top:2px;" class="image-set-2 col-md-12">
+          <img class="image-set-1" src="http://res.cloudinary.com/queno/image/upload/v1536552985/Veritis%20Learning%20Circle%20School/logo.png">
+        </div>
+      </div>
+      <!-- <div class="image-set-2" >
+        <span>&nbsp; DUE DATE: </span> <span>{{studentChalan.fee.dueDate | date}}</span>
+      </div> -->
+      <br><br>
+      <table border="0">
+        <tr>
+          <td>&nbsp; <b>KUICKPAY ID :</b></td>
+          <td></td>
+          <!-- previously {{studentChalan.fee.onlinePayFeeVoucherID}} -->
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>04010{{studentChalan.studentInfo.rollNumber | uppercase}}</b></td>
+        </tr>
+        <tr>
+          <td>&nbsp; <b>DUE DATE :</b></td>
+          <td></td>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{{studentChalan.fee.dueDate | date:'dd-MMMM-yyyy' | uppercase}}</b></td>
+        </tr>
+        <br/>
+        <tr>
+          <td>&nbsp; LEARNER'S NAME :</td>
+          <td></td>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{studentChalan.studentInfo.firstName +" "+ studentChalan.studentInfo.lastName | uppercase}}</td>
+        </tr>
+        <tr>
+          <td>&nbsp; GRADE:</td>
+          <td></td>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{studentChalan.studentInfo.className | uppercase}}</td>
+        </tr>
+        <tr>
+          <td>&nbsp; REGISTRATION NO :</td>
+          <td></td>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{studentChalan.studentInfo.rollNumber | uppercase}}</td>
+        </tr>
+      </table>
+      <br>
+      <div align="center">
+        <b><span class="span-color-1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>{{studentChalan.fee.monthYear | date:'MMMM,yyyy' | uppercase}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></b>
+      </div>
+      <br>
+      <div align="center">
+        <table class="table-width-1 table table-bordered">
+          <thead>
+          <tr>
+            <th class="text-center-1">BILLING INFORMATION</th>
+            <th class="text-center-1"> AMOUNT (PKR)</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngIf="studentChalan.fee.tuition > 0">
+            <td>TUITION FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.tuition  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.annualResourceFee > 0">
+            <td>ANNUAL RESOURCE FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.annualResourceFee  | number : 0}}</td>
+          </tr>
+           <tr *ngIf="studentChalan.fee.moduleFee > 0">
+            <td>MODULE FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.moduleFee  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.registrationFee > 0">
+            <td>REGISTRATION FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.registrationFee  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.securityDeposit > 0">
+            <td>SECURITY DEPOSIT</td>
+            <td class="text-end-1">{{studentChalan.fee.securityDeposit  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.other > 0">
+            <td>OTHER FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.other  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.admission > 0">
+            <td>ADMISSION FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.admission  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.annual > 0">
+            <td>ANNUAL FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.annual  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.computer > 0">
+            <td>COMPUTER FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.computer  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.course > 0">
+            <td>COURSE FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.course  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.fine > 0">
+            <td>FINE FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.fine  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.fund > 0">
+            <td>FUND FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.fund  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.lab > 0">
+            <td>LAB FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.lab  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.library > 0">
+            <td>LIBRARY FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.library  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.sports > 0">
+            <td>SPORTS FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.sports  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.transport > 0">
+            <td>TRANSPORT FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.transport  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.taxAdvance > 0">
+            <td>ADVANCE TAX 5%</td>
+            <td class="text-end-1">{{studentChalan.fee.taxAdvance  | number : 0}}</td>
+          </tr>   
+          <tr *ngIf="!studentChalan.fee.taxAdvance">
+            <td>ADVANCE TAX 5%</td>
+            <td class="text-end-1">0</td>
+          </tr> 
+          </tbody>
+          <tfoot>
+          <tr >
+            <td class="text-center-1"><b>TOTAL FEE BY DUE DATE</b></td>
+            <td class="text-end-1"><b>{{studentChalan.fee.totalFeeBeforeDueDate | number : 0}}</b></td>
+          </tr>
+          <!-- <tr >
+            <td class="text-center-1">TOTAL FEE AFTER DUE DATE</td>
+            <td class="text-end-1">{{studentChalan.fee.totalFeeAfterDueDate}}</td>
+          </tr> -->
+          </tfoot>
+        </table>
+       <div class="align-set-1 dep">
+        <p><b> DEPOSITOR'S CNIC NO.:_________________________</b></p>
+        </div> 
+       <div class="align-set-1 dop">
+        <p><b> DATE OF DEPOSIT:_________________________</b></p>
+        </div> 
+        <div class="align-set-1 mop">
+          <p><b> MODE OF PAYMENT:
+            <span class="checkmark"></span> <span style="margin-left:32px;">CASH</span> 
+            <span class="checkmark"></span> <span style="margin-left:32px;">HBL CHEQUE/PO</span> 
+          </b></p>        
+        </div> 
+      </div>
+      <div class="align-set-1">
+        <div class="margin-set-1">
+          <p>A late fee of PKR 100 will be charged per day for payments made after due date</p>
+          <h5><b>HBL Account No. 00427991863003</b></h5>
+        </div>
+        <div class="margin-set-1" align="center">
+          <p>*Advance Tax Under Section 236I of Income Ordinance</p>
+          <h5><b>TITLE OF ACCOUNT IS "HUMANITAS EDUCATION SYSTEM PVT LTD.</b></h5>
+          <!-- <p><b>PLEASE MAKE CHEQUE IN FAVOR OF "HUMANITAS EDUCATION SYSTEMS PVT LTD"</b></p> -->
+        </div>
+      </div>
+      <!--work Ends Here-->
+    </div>
+  </div>
+  <!--ngFor for studentCopy-->
+
+  <!--ngFor for parentCopy-->
+  <div class="col-md-4 col-sm-4 col-lg-4 col-xs-4">
+    <div class="border-adder">
+      <b><span class="span-color-1" style="margin-left: 4px" align="left"> BANK'S COPY &nbsp; &nbsp; </span></b>
+      <div class="row">
+        <div style="margin-top:2px;" class="image-set-2 col-md-12">
+          <img class="image-set-1" src="http://res.cloudinary.com/queno/image/upload/v1536552985/Veritis%20Learning%20Circle%20School/logo.png">
+        </div>
+      </div>
+      <!-- <div class="image-set-2" >
+        <span>&nbsp; DUE DATE: </span> <span>{{studentChalan.fee.dueDate | date}}</span>
+      </div> -->
+      <br><br>
+      <table border="0">
+        <tr>
+          <td>&nbsp; <b>KUICKPAY ID :</b></td>
+          <td></td>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>04010{{studentChalan.studentInfo.rollNumber | uppercase}}</b></td>
+        </tr>
+        <tr>
+          <td>&nbsp; <b>DUE DATE :</b></td>
+          <td></td>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{{studentChalan.fee.dueDate | date:'dd-MMMM-yyyy' | uppercase}}</b></td>
+        </tr>
+        <br/>
+        <tr>
+          <td>&nbsp; LEARNER'S NAME :</td>
+          <td></td>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{studentChalan.studentInfo.firstName +" "+ studentChalan.studentInfo.lastName | uppercase}}</td>
+        </tr>
+        <tr>
+          <td>&nbsp; GRADE:</td>
+          <td></td>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{studentChalan.studentInfo.className | uppercase}}</td>
+        </tr>
+        <tr>
+          <td>&nbsp; REGISTRATION NO :</td>
+          <td></td>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{studentChalan.studentInfo.rollNumber | uppercase}}</td>
+        </tr>        
+      </table>
+      <br>
+      <div align="center">
+        <b><span class="span-color-1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>{{studentChalan.fee.monthYear | date:'MMMM,yyyy' | uppercase}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></b>
+      </div>
+      <br>
+      <div align="center">
+        <table class="table-width-1 table table-bordered">
+          <thead>
+          <tr>
+            <th class="text-center-1">BILLING INFORMATION</th>
+            <th class="text-center-1"> AMOUNT (PKR)</th>
+          </tr>
+          </thead>
+          <tbody>
+
+          <tr *ngIf="studentChalan.fee.tuition > 0">
+            <td>TUITION FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.tuition  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.annualResourceFee > 0">
+            <td>ANNUAL RESOURCE FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.annualResourceFee  | number : 0}}</td>
+          </tr>
+           <tr *ngIf="studentChalan.fee.moduleFee > 0">
+            <td>MODULE FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.moduleFee  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.registrationFee > 0">
+            <td>REGISTRATION FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.registrationFee  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.securityDeposit > 0">
+            <td>SECURITY DEPOSIT</td>
+            <td class="text-end-1">{{studentChalan.fee.securityDeposit  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.other > 0">
+            <td>OTHER FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.other  | number : 0}}</td>
+          </tr>       
+          <tr *ngIf="studentChalan.fee.admission > 0">
+            <td>ADMISSION FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.admission  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.annual > 0">
+            <td>ANNUAL FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.annual  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.computer > 0">
+            <td>COMPUTER FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.computer  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.course > 0">
+            <td>COURSE FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.course  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.fine > 0">
+            <td>FINE FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.fine  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.fund > 0">
+            <td>FUND FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.fund  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.lab > 0">
+            <td>LAB FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.lab  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.library > 0">
+            <td>LIBRARY FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.library  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.sports > 0">
+            <td>SPORTS FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.sports  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.transport > 0">
+            <td>TRANSPORT FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.transport  | number : 0}}</td>
+          </tr>
+          
+          <tr *ngIf="studentChalan.fee.taxAdvance > 0">
+            <td>ADVANCE TAX 5%</td>
+            <td class="text-end-1">{{studentChalan.fee.taxAdvance  | number : 0}}</td>
+          </tr>   
+          <tr *ngIf="!studentChalan.fee.taxAdvance">
+            <td>ADVANCE TAX 5%</td>
+            <td class="text-end-1">0</td>
+          </tr> 
+          </tbody>
+          <tfoot>
+          <tr >
+            <td class="text-center-1"><b>TOTAL FEE BY DUE DATE</b></td>
+            <td class="text-end-1"><b>{{studentChalan.fee.totalFeeBeforeDueDate | number : 0}}</b></td>
+          </tr>
+          <!-- <tr >
+            <td class="text-center-1">TOTAL FEE AFTER DUE DATE</td>
+            <td class="text-end-1">{{studentChalan.fee.totalFeeAfterDueDate}}</td>
+          </tr> -->
+          </tfoot>
+        </table>
+        <div class="align-set-1 dep">
+          <p><b> DEPOSITOR'S CNIC NO.:_________________________</b></p>
+        </div>
+        <div class="align-set-1 dop">
+          <p><b> DATE OF DEPOSIT:_________________________</b></p>
+        </div> 
+        <div class="align-set-1 mop">
+          <p><b> MODE OF PAYMENT:
+            <span class="checkmark"></span> <span style="margin-left:32px;">CASH</span> 
+            <span class="checkmark"></span> <span style="margin-left:32px;">HBL CHEQUE/PO</span> 
+          </b></p>        
+        </div> 
+      </div>
+      <div class="align-set-1">
+        <div class="margin-set-1">
+          <p>A late fee of PKR 100 will be charged per day for payments made after due date</p>
+          <h5><b>HBL Account No. 00427991863003</b></h5>
+        </div>
+        <div class="margin-set-1" align="center">
+          <p>*Advance Tax Under Section 236I of Income Ordinance</p>
+          <h5><b>TITLE OF ACCOUNT IS "HUMANITAS EDUCATION SYSTEM PVT LTD.</b></h5>
+          <!-- <p><b>PLEASE MAKE CHEQUE IN FAVOR OF "HUMANITAS EDUCATION SYSTEMS PVT LTD"</b></p> -->
+        </div>
+      </div>
+      <!--work Ends Here-->
+    </div>
+  </div>
+  <!--ngFor for parentCopy-->
+
+  <!--ngFor for bankCopy-->
+  <div class="col-md-4 col-sm-4 col-lg-4 col-xs-4">
+    <div class="border-adder">
+      <b><span class="span-color-1" style="margin-left: 4px" align="left"> PARENT'S COPY &nbsp; &nbsp; </span></b>
+      <div class="row">
+        <div style="margin-top:2px;" class="image-set-2 col-md-12">
+          <img class="image-set-1" src="http://res.cloudinary.com/queno/image/upload/v1536552985/Veritis%20Learning%20Circle%20School/logo.png">
+        </div>
+      </div>
+      <!-- <div class="image-set-2" >
+        <span>&nbsp; DUE DATE: </span> <span>{{studentChalan.fee.dueDate | date}}</span>
+      </div> -->
+      <br><br>
+      <table border="0">
+        <tr>
+          <td>&nbsp; <b>KUICKPAY ID :</b></td>
+          <td></td>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>04010{{studentChalan.studentInfo.rollNumber | uppercase}}</b></td>
+        </tr>
+        <tr>
+          <td>&nbsp; <b>DUE DATE :</b></td>
+          <td></td>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{{studentChalan.fee.dueDate | date:'dd-MMMM-yyyy' | uppercase}}</b></td>
+        </tr>
+        <br/>
+        <tr>
+          <td>&nbsp; LEARNER'S NAME :</td>
+          <td></td>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{studentChalan.studentInfo.firstName +" "+ studentChalan.studentInfo.lastName  | uppercase}}</td>
+        </tr>
+        <tr>
+          <td>&nbsp; GRADE:</td>
+          <td></td>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{studentChalan.studentInfo.className | uppercase}}</td>
+        </tr>
+        <tr>
+          <td>&nbsp; REGISTRATION NO :</td>
+          <td></td>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{studentChalan.studentInfo.rollNumber | uppercase}}</td>
+        </tr>        
+      </table>
+      <br>
+      <div align="center">
+        <b><span class="span-color-1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>{{studentChalan.fee.monthYear | date:'MMMM,yyyy' | uppercase}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></b>
+      </div>
+      <br>
+      <div align="center">
+        <table class="table-width-1 table table-bordered">
+          <thead>
+          <tr>
+            <th class="text-center-1">BILLING INFORMATION</th>
+            <th class="text-center-1"> AMOUNT (PKR)</th>
+          </tr>
+          </thead>
+          <tbody>
+
+          <tr *ngIf="studentChalan.fee.tuition > 0">
+            <td>TUITION FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.tuition  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.annualResourceFee > 0">
+            <td>ANNUAL RESOURCE FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.annualResourceFee  | number : 0}}</td>
+          </tr>
+           <tr *ngIf="studentChalan.fee.moduleFee > 0">
+            <td>MODULE FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.moduleFee  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.registrationFee > 0">
+            <td>REGISTRATION FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.registrationFee  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.securityDeposit > 0">
+            <td>SECURITY DEPOSIT</td>
+            <td class="text-end-1">{{studentChalan.fee.securityDeposit  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.other > 0">
+            <td>OTHER FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.other  | number : 0}}</td>
+          </tr>         
+          <tr *ngIf="studentChalan.fee.admission > 0">
+            <td>ADMISSION FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.admission  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.annual > 0">
+            <td>ANNUAL FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.annual  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.computer > 0">
+            <td>COMPUTER FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.computer  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.course > 0">
+            <td>COURSE FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.course  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.fine > 0">
+            <td>FINE FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.fine  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.fund > 0">
+            <td>FUND FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.fund  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.lab > 0">
+            <td>LAB FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.lab  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.library > 0">
+            <td>LIBRARY FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.library  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.sports > 0">
+            <td>SPORTS FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.sports  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.transport > 0">
+            <td>TRANSPORT FEE</td>
+            <td class="text-end-1">{{studentChalan.fee.transport  | number : 0}}</td>
+          </tr>
+          <tr *ngIf="studentChalan.fee.taxAdvance > 0">
+            <td>ADVANCE TAX 5%</td>
+            <td class="text-end-1">{{studentChalan.fee.taxAdvance  | number : 0}}</td>
+          </tr>   
+          <tr *ngIf="!studentChalan.fee.taxAdvance">
+            <td>ADVANCE TAX 5%</td>
+            <td class="text-end-1">0</td>
+          </tr> 
+          </tbody>
+          <tfoot>
+          <tr >
+            <td class="text-center-1"><b>TOTAL FEE BY DUE DATE</b></td>
+            <td class="text-end-1"><b>{{studentChalan.fee.totalFeeBeforeDueDate | number : 0}}</b></td>
+          </tr>
+          <!-- <tr >
+            <td class="text-center-1">TOTAL FEE AFTER DUE DATE</td>
+            <td class="text-end-1">{{studentChalan.fee.totalFeeAfterDueDate}}</td>
+          </tr> -->
+          </tfoot>
+        </table>
+        <div class="align-set-1 dep">
+          <p><b> DEPOSITOR'S CNIC NO.:_________________________</b></p>
+        </div>    
+        <div class="align-set-1 dop">
+          <p><b> DATE OF DEPOSIT:_________________________</b></p>
+        </div> 
+        <div class="align-set-1 mop">
+          <p><b> MODE OF PAYMENT:
+            <span class="checkmark"></span> <span style="margin-left:32px;">CASH</span> 
+            <span class="checkmark"></span> <span style="margin-left:32px;">HBL CHEQUE/PO</span> 
+          </b></p>        
+        </div>    
+      </div>
+      <div class="align-set-1">
+        <div class="margin-set-1">
+          <p>A late fee of PKR 100 will be charged per day for payments made after due date</p>
+          <h5><b>HBL Account No. 00427991863003</b></h5>
+        </div>
+        <div class="margin-set-1" align="center">
+          <p>*Advance Tax Under Section 236I of Income Ordinance</p>
+          <h5><b>TITLE OF ACCOUNT IS "HUMANITAS EDUCATION SYSTEM PVT LTD.</b></h5>
+          <!-- <p><b>PLEASE MAKE CHEQUE IN FAVOR OF "HUMANITAS EDUCATION SYSTEMS PVT LTD"</b></p> -->
+        </div>
+      </div>
+      <!--work Ends Here-->
+    </div>
+  </div>
+  <!--ngFor for bankCopy-->
+</div>
+</div>

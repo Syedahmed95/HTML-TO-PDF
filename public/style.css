@@ -1,0 +1,23 @@
+.textpos{
+   margin-top: 50px;
+   font-size: 22px;
+}
+.textpos1{
+    margin-top: 20px ;
+}
+.textpos2{
+    position: relative;
+    top:180px
+}
+.textmargin{
+    margin-top: 0px;
+}
+.tablemargin{
+    margin-top: 0px;
+}
+img{
+    width: 250px;
+}
+.table-condensed{
+    font-size: 5px !important;
+}
