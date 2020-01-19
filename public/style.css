@@ -19,5 +19,11 @@ img{
     width: 250px;
 }
 .table-condensed{
-    font-size: 5px !important;
+    font-size: 12px !important;
+}
+.Pmargin{
+    margin-top: -15px !important;
+}
+.p1{
+    margin-top: -5px !important;
 }
